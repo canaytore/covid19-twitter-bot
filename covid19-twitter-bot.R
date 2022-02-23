@@ -1,3 +1,5 @@
+library(tidyverse)
+
 # Create Twitter token
 twitter_token <- rtweet::create_token(
   app = "twitter_bot",
@@ -8,6 +10,11 @@ twitter_token <- rtweet::create_token(
 )
 
 # Import Covid figures
+covid_data <- read.csv('https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/owid-covid-data.csv')
+
+covid_data$date = as.Date(covid_data$date)
+
+
 
 
 # Post the image to Twitter

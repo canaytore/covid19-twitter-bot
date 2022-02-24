@@ -12,14 +12,21 @@ twitter_token <- rtweet::create_token(
 # Import Covid figures
 covid_data <- read.csv('https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/owid-covid-data.csv')
 
-covid_data$date = as.Date(covid_data$date)
+covid_data$date <- as.Date(covid_data$date)
 
+glimpse(covid_data)
 
+covid_data <- covid_data %>% 
+  filter(location == "Turkey") %>%
+  select(date, new_cases)
 
+nrow <- nrow(covid_data)
+
+last_week <- covid_data[(nrow-6):nrow,] %>% select(new_cases)
 
 # Post the image to Twitter
 rtweet::post_tweet(
-  status = "Today Covid19 numbers: ..",
+  status = paste0("Türkiye'de son 1 haftadaki günlük Covid19 vaka sayıları: ", last_week),
   # media = temp_file,
   token = twitter_token
 )

@@ -2,7 +2,7 @@ name: twitter_bot
 
 on:
   schedule:
-    - cron: '0 0 * * *'  #for at every end of the day
+    - cron: '*/5 * * * *'  #for at every end of the day
 
 jobs:
   twitter_bot-post:
